@@ -75,6 +75,6 @@ You should see some YAMLy output like:
 
 ### Notes
 
-* The assumption here is that `<trusted.kdb>` is your canonical database, and you're interested in tracking-down entries that are in the rogue DBs but not the `trusted` one and adding them to `trusted`
+* The assumption here is that `<trusted.kdb>` is your canonical database, and you're interested in tracking-down entries that are in the rogue DBs but not the `trusted` one, and adding them to `trusted`
 * For the `Different data` section, I just went to the services concerned and tried each password to see which one was cromulent
 * I may be the only person having this problem, of course
