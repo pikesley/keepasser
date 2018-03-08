@@ -10,11 +10,9 @@ module Keepasser
       parsers[0].keys.each do |group|
         missing = []
         left = parsers[0][group].keys - parsers[1][group].keys
-      #  missing += left
         left.map { |entry| parsers[0][group].delete entry }
 
         right = parsers[1][group].keys - parsers[0][group].keys
-        #require "pry" ; binding.pry
         missing += right.map { |e| { e => parsers[1][group][e].fields } }
         right.map { |entry| parsers[1][group].delete entry }
 
