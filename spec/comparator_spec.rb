@@ -29,7 +29,7 @@ module Keepasser
       it 'identifies the missing entries' do
         expect(comparator.errors).to eq ({
           'Missing entries' => {
-            'Sitwell Enterprises' => ['Father']
+            'Bluth Company' => ['Middleman']
           }
         })
       end
@@ -43,15 +43,14 @@ module Keepasser
       it 'identifies the differences' do
         expect(comparator.errors).to eq ({
           'Missing entries' => {
-            'Bluth Company' => ['Middleman'],
-            'Sitwell Enterprises' => ['Daughter']
+            'Bluth Company' => ['Adoptee']
           },
           'Different data' => {
-            'Bluth Company' => {
-              'Adoptee' => {
+            'Sitwell Enterprises' => {
+              'Employee' => {
                 'password' => [
-                  'hello',
-                  'annyong'
+                  'foobar',
+                  'barfoo'
                 ]
               }
             }
@@ -63,15 +62,13 @@ module Keepasser
         expect(comparator.to_s).to eq """---
 Missing entries:
   Bluth Company:
-  - Middleman
-  Sitwell Enterprises:
-  - Daughter
+  - Adoptee
 Different data:
-  Bluth Company:
-    Adoptee:
+  Sitwell Enterprises:
+    Employee:
       password:
-      - hello
-      - annyong
+      - foobar
+      - barfoo
 """
       end
     end

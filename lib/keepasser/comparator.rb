@@ -10,7 +10,7 @@ module Keepasser
       parsers[0].keys.each do |group|
         missing = []
         left = parsers[0][group].keys - parsers[1][group].keys
-        missing += left
+      #  missing += left
         left.map { |entry| parsers[0][group].delete entry }
 
         right = parsers[1][group].keys - parsers[0][group].keys
