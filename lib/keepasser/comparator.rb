@@ -3,18 +3,28 @@ module Keepasser
     attr_reader :errors
 
     def initialize left, right
-      parsers = [Parser.new(left), Parser.new(right)]
+      left = Parser.new left
+      right = Parser.new right
 
       @errors = {}
 
-      parsers[0].keys.each do |group|
+      left.keys.each do |group|
         missing = []
-        left = parsers[0][group].keys - parsers[1][group].keys
-        left.map { |entry| parsers[0][group].delete entry }
 
-        right = parsers[1][group].keys - parsers[0][group].keys
-        missing += right.map { |e| { e => parsers[1][group][e].fields } }
-        right.map { |entry| parsers[1][group].delete entry }
+        begin
+          left_diff = left[group].keys - right[group].keys
+        rescue NoMethodError => e
+          left_diff = []
+        end
+        left_diff.map { |entry| left[group].delete entry }
+
+        begin
+          right_diff = right[group].keys - left[group].keys
+        rescue NoMethodError
+          right_diff = []
+        end
+        missing += right_diff.map { |e| { e => right[group][e].fields } }
+        right_diff.map { |entry| right[group].delete entry }
 
         if missing.any?
           begin
@@ -26,15 +36,15 @@ module Keepasser
         end
       end
 
-      parsers[0].each_pair do |group, entries|
+      left.each_pair do |group, entries|
         entries.each_pair do |title, data|
-          if data.fields != parsers[1][group][title].fields
+          if data.fields != right[group][title].fields
             @errors['Different data'] = {}
             @errors['Different data'][group] = {}
             @errors['Different data'][group][title] = {}
             data.fields.each_pair do |key, value|
-              other_value = parsers[1][group][title].fields[key]
-              if value != parsers[1][group][title].fields[key]
+              other_value = right[group][title].fields[key]
+              if value != right[group][title].fields[key]
                 @errors['Different data'][group][title][key] = [value, other_value]
               end
             end
