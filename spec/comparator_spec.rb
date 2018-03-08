@@ -3,7 +3,7 @@ module Keepasser
     context 'different data' do
       left = 'spec/fixtures/differing-passwords/left.txt'
       right = 'spec/fixtures/differing-passwords/right.txt'
-      comparator = Comparator.new [left, right]
+      comparator = Comparator.new left, right
 
       it 'finds the differing passwords' do
         expect(comparator.errors).to eq ({
@@ -24,7 +24,7 @@ module Keepasser
     context 'missing entries' do
       left = 'spec/fixtures/missing-entries/left.txt'
       right = 'spec/fixtures/missing-entries/right.txt'
-      comparator = Comparator.new [left, right]
+      comparator = Comparator.new left, right
 
       it 'identifies the missing entries' do
         expect(comparator.errors).to eq ({
@@ -38,7 +38,7 @@ module Keepasser
     context 'multiple differences' do
       left = 'spec/fixtures/multiple-diffs/left.txt'
       right = 'spec/fixtures/multiple-diffs/right.txt'
-      comparator = Comparator.new [left, right]
+      comparator = Comparator.new left, right
 
       it 'identifies the differences' do
         expect(comparator.errors).to eq ({

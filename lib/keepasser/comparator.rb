@@ -2,11 +2,8 @@ module Keepasser
   class Comparator
     attr_reader :errors
 
-    def initialize paths
-      parsers = []
-      paths.each do |path|
-        parsers.push Parser.new path
-      end
+    def initialize left, right
+      parsers = [Parser.new(left), Parser.new(right)]
 
       @errors = {}
 

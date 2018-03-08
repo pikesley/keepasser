@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'keepasser/cli'
+Keepasser::CLI.start

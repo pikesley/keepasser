@@ -1,4 +1,5 @@
 require 'yaml'
+require 'thor'
 
 require 'keepasser/version'
 require 'keepasser/entry'
