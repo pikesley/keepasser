@@ -1,2 +1,2 @@
-require "keepasser/version"
+require 'keepasser/version'
 require 'keepasser/entry'
