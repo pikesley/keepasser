@@ -1,13 +1,13 @@
 module Keepasser
   describe Entry do
     context 'make a simple entry' do
-      source = """
-Title:    Secret Stuff
-Username: michael.bluth
-Url:      https://bluth.com
-Password: terrible_mistake
-Comment:
-      """
+      source = [
+        'Title:    Secret Stuff',
+        'Username: michael.bluth',
+        'Url:      https://bluth.com',
+        'Password: terrible_mistake',
+        'Comment:'
+      ]
       entry = Entry.new source
 
       it 'has fields' do
@@ -21,15 +21,15 @@ Comment:
     end
 
     context 'entry with multi-line comment' do
-      source = """
-Title:    Commented stuff
-Username: gob.bluth
-Url:
-Password: loose_seal
-Comment:   comments
-           more comments
-           yet more comments
-      """
+      source = [
+'Title:    Commented stuff',
+'Username: gob.bluth',
+'Url:',
+'Password: loose_seal',
+'Comment:   comments',
+'           more comments',
+'           yet more comments'
+      ]
       entry = Entry.new source
 
       it 'has comments' do
@@ -43,10 +43,10 @@ Comment:   comments
     end
 
     context 'assign a group' do
-      source = """
-Title:    Secret Stuff
-Username: michael.bluth
-      """
+      source = [
+'Title:    Secret Stuff',
+'Username: michael.bluth'
+      ]
       entry = Entry.new source
 
       it 'takes a group' do
