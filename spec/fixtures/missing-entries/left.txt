@@ -1,0 +1,29 @@
+*** Group: Bluth Company ***
+
+  Title:    Attorney
+  Username: bob.loblaw
+  Url:      http://bobloblawlowblog.com
+  Password: bobloblawlowblog
+  Comment:
+
+  Title:    Middleman
+  Username: larry.middleman
+  Url:
+  Password: bazbarfoo
+  Comment:  this is a comment
+            also this is a comment
+            and this
+
+*** Group: Sitwell Enterprises ***
+
+  Title:    Father
+  Username: stan.sitwell
+  Url:
+  Password: edbegleyjr
+  Comment:
+
+  Title:    Daughter
+  Username: sally.sitwell
+  Url:
+  Password: foobar
+  Comment:

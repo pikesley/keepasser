@@ -1,7 +1,10 @@
 module Keepasser
   class Parser < Hash
+    attr_reader :path
+    
     def initialize path
-      lines = File.readlines path
+      @path = path
+      lines = File.readlines @path
 
       bucket= []
       lines.each do |line|

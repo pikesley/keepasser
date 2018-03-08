@@ -1,0 +1,33 @@
+*** Group: Bluth Company ***
+
+  Title:    Attorney
+  Username: bob.loblaw
+  Url:      http://bobloblawlowblog.com
+  Password: bobloblawlowblog
+  Comment:
+
+  Title:    Adoptee
+  Username: annyong
+  Url:
+  Password: hello
+  Comment:
+
+*** Group: Sitwell Enterprises ***
+
+  Title:    Father
+  Username: stan.sitwell
+  Url:
+  Password: edbegleyjr
+  Comment:
+
+  Title:    Daughter
+  Username: sally.sitwell
+  Url:
+  Password: foobar
+  Comment:
+
+  Title:    Employee
+  Username: michael.bluth
+  Url:
+  Password: foobar
+  Comment:

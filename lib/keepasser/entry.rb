@@ -1,6 +1,7 @@
 module Keepasser
   class Entry
     attr_accessor :group
+    attr_reader :fields
 
     def initialize data
       @fields = {}
@@ -15,8 +16,16 @@ module Keepasser
       data.select { |f| f[0..5] == '      ' }.map { |c| @fields['comment'].push c.strip }
     end
 
+    def [] key
+      @fields[key]
+    end
+
     def method_missing m, *args
       @fields[m.to_s]
+    end
+
+    def == other
+      @fields == other.fields
     end
   end
 end

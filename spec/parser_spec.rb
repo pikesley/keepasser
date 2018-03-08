@@ -3,6 +3,10 @@ module Keepasser
     context 'parse simple file' do
       parser = Parser.new 'spec/fixtures/simple.txt'
 
+      it 'has a path' do
+        expect(parser.path).to eq 'spec/fixtures/simple.txt'
+      end
+
       it 'has entries' do
         expect(parser['Bluth Company'].keys.length).to eq 3
       end
@@ -11,6 +15,7 @@ module Keepasser
         entry = parser['Bluth Company']['Attorney']
         expect(entry).to be_an Entry
         expect(entry.username).to eq 'bob.loblaw'
+        expect(entry['password']).to eq 'bobloblawlowblog'
       end
 
       specify 'entries have a group' do
