@@ -5,7 +5,7 @@ module Keepasser
     def initialize left, right
       left = Parser.new left
       right = Parser.new right
-
+require "pry" ; binding.pry
       @errors = {}
 
       rogue_groups = right.keys - left.keys
