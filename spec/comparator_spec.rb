@@ -34,7 +34,6 @@ module Keepasser
                 'Middleman' => {
                   'title' => 'Middleman',
                   'username' => 'larry.middleman',
-                  'url' => '',
                   'password' => 'bazbarfoo',
                   'comment' => [
                     'this is a comment',
@@ -62,9 +61,7 @@ module Keepasser
                 'Adoptee' => {
                   'title' => 'Adoptee',
                   'username' => 'annyong',
-                  'url' => '',
                   'password' => 'annyong',
-                  'comment' => ['']
                 }
               }
             ]
@@ -89,10 +86,7 @@ Missing entries:
   - Adoptee:
       title: Adoptee
       username: annyong
-      url: ''
       password: annyong
-      comment:
-      - ''
 Different data:
   Sitwell Enterprises:
     Employee:

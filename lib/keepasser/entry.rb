@@ -6,7 +6,7 @@ module Keepasser
     def initialize data
       @fields = {}
       data.map do |d|
-        parts = d.split ':'
+        parts = d.split ': '
         if parts[1]
           @fields[parts[0].downcase.strip] = parts[1].strip
         end

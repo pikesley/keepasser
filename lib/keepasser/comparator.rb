@@ -8,6 +8,23 @@ module Keepasser
 
       @errors = {}
 
+      rogue_groups = right.keys - left.keys
+      if rogue_groups.length > 0
+        @errors['Rogue groups'] = {}
+        rogue_groups.map { |r| right[r] }.each do |g|
+          g.keys.map do |k|
+            e = g[k].fields
+            begin
+              @errors['Rogue groups'][g[k].group][k] = e
+            rescue NoMethodError
+              @errors['Rogue groups'][g[k].group] = {}
+              @errors['Rogue groups'][g[k].group][k] = e
+            end
+          end
+        end
+        rogue_groups.map { |r| right.delete r }
+      end
+
       left.keys.each do |group|
         missing = []
 
@@ -36,16 +53,18 @@ module Keepasser
         end
       end
 
-      left.each_pair do |group, entries|
-        entries.each_pair do |title, data|
-          if data.fields != right[group][title].fields
-            @errors['Different data'] = {}
-            @errors['Different data'][group] = {}
-            @errors['Different data'][group][title] = {}
-            data.fields.each_pair do |key, value|
-              other_value = right[group][title].fields[key]
-              if value != right[group][title].fields[key]
-                @errors['Different data'][group][title][key] = [value, other_value]
+      unless right == {}
+        left.each_pair do |group, entries|
+          entries.each_pair do |title, data|
+            if data.fields != right[group][title].fields
+              @errors['Different data'] = {}
+              @errors['Different data'][group] = {}
+              @errors['Different data'][group][title] = {}
+              data.fields.each_pair do |key, value|
+                other_value = right[group][title].fields[key]
+                if value != right[group][title].fields[key]
+                  @errors['Different data'][group][title][key] = [value, other_value]
+                end
               end
             end
           end
