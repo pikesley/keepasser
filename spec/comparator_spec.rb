@@ -39,7 +39,8 @@ module Keepasser
                     'this is a comment',
                     'also this is a comment',
                     'and this'
-                  ]
+                  ],
+                  'group' => 'Bluth Company'
                 }
               }
             ]
@@ -62,6 +63,7 @@ module Keepasser
                   'title' => 'Adoptee',
                   'username' => 'annyong',
                   'password' => 'annyong',
+                  'group' => 'Bluth Company'
                 }
               }
             ]
@@ -87,6 +89,7 @@ Missing entries:
       title: Adoptee
       username: annyong
       password: annyong
+      group: Bluth Company
 Different data:
   Sitwell Enterprises:
     Employee:

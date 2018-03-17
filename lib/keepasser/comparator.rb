@@ -5,7 +5,7 @@ module Keepasser
     def initialize left, right
       left = Parser.new left
       right = Parser.new right
-require "pry" ; binding.pry
+
       @errors = {}
 
       rogue_groups = right.keys - left.keys
@@ -13,12 +13,12 @@ require "pry" ; binding.pry
         @errors['Rogue groups'] = {}
         rogue_groups.map { |r| right[r] }.each do |g|
           g.keys.map do |k|
-            e = g[k].fields
+            e = g[k]
             begin
-              @errors['Rogue groups'][g[k].group][k] = e
+              @errors['Rogue groups'][g[k]['group']][k] = e
             rescue NoMethodError
-              @errors['Rogue groups'][g[k].group] = {}
-              @errors['Rogue groups'][g[k].group][k] = e
+              @errors['Rogue groups'][g[k]['group']] = {}
+              @errors['Rogue groups'][g[k]['group']][k] = e
             end
           end
         end
@@ -40,7 +40,7 @@ require "pry" ; binding.pry
         rescue NoMethodError
           right_diff = []
         end
-        missing += right_diff.map { |e| { e => right[group][e].fields } }
+        missing += right_diff.map { |e| { e => right[group][e] } }
         right_diff.map { |entry| right[group].delete entry }
 
         if missing.any?
@@ -56,13 +56,13 @@ require "pry" ; binding.pry
       unless right == {}
         left.each_pair do |group, entries|
           entries.each_pair do |title, data|
-            if data.fields != right[group][title].fields
+            if data != right[group][title]
               @errors['Different data'] = {}
               @errors['Different data'][group] = {}
               @errors['Different data'][group][title] = {}
-              data.fields.each_pair do |key, value|
-                other_value = right[group][title].fields[key]
-                if value != right[group][title].fields[key]
+              data.each_pair do |key, value|
+                other_value = right[group][title][key]
+                if value != right[group][title][key]
                   @errors['Different data'][group][title][key] = [value, other_value]
                 end
               end
@@ -73,7 +73,7 @@ require "pry" ; binding.pry
     end
 
     def to_s
-      @errors.to_yaml
+      @errors.to_yaml.gsub ' !ruby/hash:Keepasser::Entry', ''
     end
   end
 end

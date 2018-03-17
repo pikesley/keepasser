@@ -4,7 +4,6 @@ module Keepasser
     attr_reader :fields
 
     def initialize data
-      @fields = {}
       data.map do |d|
         parts = d.split ': '
         if parts[1]
@@ -15,17 +14,5 @@ module Keepasser
       self['comment'] = [self['comment']] if self['comment']
       data.select { |f| f[0..5] == '      ' }.map { |c| self['comment'].push c.strip }
     end
-
-    # def [] key
-    #   @fields[key]
-    # end
-    #
-    # def method_missing m, *args
-    #   @fields[m.to_s]
-    # end
-
-    # def == other
-    #   @fields == other.fields
-    # end
   end
 end

@@ -14,12 +14,12 @@ module Keepasser
       it 'has correct entries' do
         entry = parser['Bluth Company']['Attorney']
         expect(entry).to be_an Entry
-        expect(entry.username).to eq 'bob.loblaw'
+        expect(entry['username']).to eq 'bob.loblaw'
         expect(entry['password']).to eq 'bobloblawlowblog'
       end
 
       specify 'entries have a group' do
-        expect(parser['Bluth Company']['Attorney'].group).to eq 'Bluth Company'
+        expect(parser['Bluth Company']['Attorney']['group']).to eq 'Bluth Company'
       end
     end
 
@@ -31,7 +31,7 @@ module Keepasser
       end
 
       it 'has correct groups' do
-        expect(parser['Sitwell Enterprises']['Daughter'].group).to eq 'Sitwell Enterprises'
+        expect(parser['Sitwell Enterprises']['Daughter']['group']).to eq 'Sitwell Enterprises'
       end
     end
   end

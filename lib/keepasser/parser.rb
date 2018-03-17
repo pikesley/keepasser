@@ -1,7 +1,7 @@
 module Keepasser
   class Parser < Hash
     attr_reader :path
-    
+
     def initialize path
       @path = path
       lines = File.readlines @path
@@ -17,9 +17,9 @@ module Keepasser
           else
             if bucket.any?
               e = Entry.new bucket
-              e.group = @group
+              e['group'] = @group
 
-              self[@group][e.title] = e.clone
+              self[@group][e['title']] = e.clone
 
               bucket = []
             end
@@ -27,9 +27,9 @@ module Keepasser
         end
       end
       e = Entry.new bucket
-      e.group = @group
+      e['group'] = @group
 
-      self[@group][e.title] = e.clone
+      self[@group][e['title']] = e.clone
     end
   end
 end
