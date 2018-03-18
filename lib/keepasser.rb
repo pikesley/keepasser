@@ -7,6 +7,7 @@ require 'keepasser/parser'
 require 'keepasser/comparator'
 require 'keepasser/group_ejector'
 require 'keepasser/missing_entries_spotter'
+require 'keepasser/difference_finder'
 
 def Keepasser.extract_groups data
   data.map { |e| e['group'] }.uniq.sort
@@ -26,8 +27,9 @@ def Keepasser.different_fields left, right
   diffs
 end
 
-def Keepasser.hash_tree
-  Hash.new do |hash, key|
-    hash[key] = Keepasser.hash_tree
-  end
+def Keepasser.groupify list
+  data = {}
+  list.map { |s| s['group'] }.uniq.map { |g| data[g] = [] }
+  list.map { |s| data[s['group']].push s }
+  data
 end

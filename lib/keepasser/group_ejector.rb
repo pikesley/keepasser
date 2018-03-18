@@ -5,13 +5,12 @@ module Keepasser
     def initialize left, right
       @left = left
       @right = right
-      @rogues = {}
 
-      spurions = @right - @left
-      spurions.map { |s| s['group'] }.uniq.map { |g| @rogues[g] = [] }
-      spurions.map { |s| @rogues[s['group']].push s }
-
-      @right -= spurions
+      if ((@left.map { |e| e['group'] }.uniq) - (@right.map { |e| e['group'] }.uniq)).length > 0
+        spurions = @right - @left
+        @rogues = Keepasser.groupify spurions
+        @right -= spurions
+      end
     end
   end
 end

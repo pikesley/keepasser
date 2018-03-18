@@ -25,6 +25,26 @@ module Keepasser
           }
         )
       end
+
+      it 'removes the extras' do
+        expect(mes.right).to eq [
+          {
+            'title' => 'Attorney',
+            'username' => 'bob.loblaw',
+            'url' => 'http://bobloblawlowblog.com',
+            'password' => 'otherpassword',
+            'group' => 'Bluth Company',
+            'id' => 'Bluth Company::Attorney'
+          },
+          {
+            'title' => 'Daughter',
+            'username' => 'sally.sitwell',
+            'password' => 'foobar',
+            'group' => 'Sitwell Enterprises',
+            'id' => 'Sitwell Enterprises::Daughter'
+          }
+        ]
+      end
     end
   end
 end

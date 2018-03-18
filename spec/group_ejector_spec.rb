@@ -42,4 +42,14 @@
       end
     end
   end
+
+  context 'ignore when groups are matching' do
+    left = Parser.new 'spec/fixtures/multiple-diffs/left.txt'
+    right = Parser.new 'spec/fixtures/multiple-diffs/right.txt'
+    ge = GroupEjector.new left, right
+
+    it 'does nothing' do
+      expect(ge.rogues).to eq nil
+    end
+  end
 end
