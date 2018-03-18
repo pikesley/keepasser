@@ -14,5 +14,14 @@ module Keepasser
       self['comment'] = [self['comment']] if self['comment']
       data.select { |f| f[0..5] == '      ' }.map { |c| self['comment'].push c.strip }
     end
+
+    def []= key, value
+      if key == 'group'
+        super
+        self['id'] = "#{self['group']}::#{self['title']}"
+      else
+        super
+      end
+    end
   end
 end

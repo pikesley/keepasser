@@ -18,7 +18,8 @@ module Keepasser
           'username' => 'bob.loblaw',
           'url' => 'http://bobloblawlowblog.com',
           'password' => 'bobloblawlowblog',
-          'group' => 'Bluth Company'
+          'group' => 'Bluth Company',
+          'id' => 'Bluth Company::Attorney'
         },
         {
           'title' => 'Middleman',
@@ -29,7 +30,8 @@ module Keepasser
             'also this is a comment',
             'and this'
           ],
-          'group' => 'Bluth Company'
+          'group' => 'Bluth Company',
+          'id' => 'Bluth Company::Middleman'
         }
       ]
     end

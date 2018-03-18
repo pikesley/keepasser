@@ -54,5 +54,18 @@ module Keepasser
         expect(entry['group']).to eq 'Blue Man Group'
       end
     end
+
+    context 'assign an ID' do
+      source = [
+'Title:    Michael Bluth',
+'Username: michael.bluth'
+      ]
+      entry = Entry.new source
+      entry['group'] = 'Bluth Company'
+
+      it 'has an ID' do
+        expect(entry['id']).to eq 'Bluth Company::Michael Bluth' 
+      end
+    end
   end
 end

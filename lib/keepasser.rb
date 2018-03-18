@@ -6,6 +6,7 @@ require 'keepasser/entry'
 require 'keepasser/parser'
 require 'keepasser/comparator'
 require 'keepasser/group_ejector'
+require 'keepasser/missing_entries_spotter'
 
 def Keepasser.extract_groups data
   data.map { |e| e['group'] }.uniq.sort

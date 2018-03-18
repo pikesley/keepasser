@@ -3,7 +3,7 @@
   Title:    Attorney
   Username: bob.loblaw
   Url:      http://bobloblawlowblog.com
-  Password: bobloblawlowblog
+  Password: otherpassword
   Comment:
 
   Title:    Middleman

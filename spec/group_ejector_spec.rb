@@ -13,14 +13,16 @@
               'username' => 'tobias.funke',
               'url' => 'https://www.blueman.com/',
               'password' => 'bluemyself',
-              'group' => 'Blue Man Group'
+              'group' => 'Blue Man Group',
+              'id' => 'Blue Man Group::Idiot'
             },
             {
               'title' => 'Blue Man',
               'username' => 'blue.man',
               'url' => 'https://www.blueman.com/',
               'password' => 'password',
-              'group' => 'Blue Man Group'
+              'group' => 'Blue Man Group',
+              'id' => 'Blue Man Group::Blue Man'
             }
           ]
           })
@@ -33,7 +35,8 @@
             'username' => 'bob.loblaw',
             'url' => 'http://bobloblawlowblog.com',
             'password' => 'bobloblawlowblog',
-            'group' => 'Bluth Company'
+            'group' => 'Bluth Company',
+            'id' => 'Bluth Company::Attorney'
           }
         ]
       end
