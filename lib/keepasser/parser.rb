@@ -1,5 +1,5 @@
 module Keepasser
-  class Parser < Hash
+  class Parser < Array
     attr_reader :path
 
     def initialize path
@@ -10,7 +10,6 @@ module Keepasser
       lines.each do |line|
         if line[0..8] == '*** Group'
           @group = line[11..-6]
-          self[@group] = {}
         else
           unless line == "\n"
             bucket.push line
@@ -19,7 +18,7 @@ module Keepasser
               e = Entry.new bucket
               e['group'] = @group
 
-              self[@group][e['title']] = e.clone
+              self.push e.clone
 
               bucket = []
             end
@@ -29,7 +28,7 @@ module Keepasser
       e = Entry.new bucket
       e['group'] = @group
 
-      self[@group][e['title']] = e.clone
+      self.push e.clone
     end
   end
 end

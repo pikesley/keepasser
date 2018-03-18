@@ -8,18 +8,18 @@ module Keepasser
       end
 
       it 'has entries' do
-        expect(parser['Bluth Company'].keys.length).to eq 3
+        expect(parser.length).to eq 3
       end
 
       it 'has correct entries' do
-        entry = parser['Bluth Company']['Attorney']
+        entry = parser[0]
         expect(entry).to be_an Entry
         expect(entry['username']).to eq 'bob.loblaw'
         expect(entry['password']).to eq 'bobloblawlowblog'
       end
 
       specify 'entries have a group' do
-        expect(parser['Bluth Company']['Attorney']['group']).to eq 'Bluth Company'
+        expect(parser[0]['group']).to eq 'Bluth Company'
       end
     end
 
@@ -27,11 +27,11 @@ module Keepasser
       parser = Parser.new 'spec/fixtures/multiple-groups.txt'
 
       it 'has groups' do
-        expect(parser.keys.length).to eq 2
+        expect(parser.map { |e| e['group'] }.uniq.length).to eq 2
       end
 
       it 'has correct groups' do
-        expect(parser['Sitwell Enterprises']['Daughter']['group']).to eq 'Sitwell Enterprises'
+        expect(parser[3]['group']).to eq 'Sitwell Enterprises'
       end
     end
   end

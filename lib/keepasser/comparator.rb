@@ -14,71 +14,53 @@ module Keepasser
     end
 
     def different_data
-      unless @right == {}
-        @left.each_pair do |group, entries|
-          entries.each_pair do |title, data|
-            if data != @right[group][title]
-              @errors['Different data'] = {}
-              @errors['Different data'][group] = {}
-              @errors['Different data'][group][title] = {}
-              data.each_pair do |key, value|
-                other_value = @right[group][title][key]
-                if value != @right[group][title][key]
-                  @errors['Different data'][group][title][key] = [value, other_value]
-                end
-              end
-            end
+      unless @right == []
+        @left.each_with_index do |entry, i|
+          diffs = Keepasser.different_fields entry, @right[i]
+          unless diffs == {}
+            @errors['Different data'] = Keepasser.hash_tree
+            @errors['Different data'][entry['group']][entry['title']] = diffs
           end
         end
+        # @left.each_pair do |group, entries|
+        #   entries.each_pair do |title, data|
+        #     if data != @right[group][title]
+        #       @errors['Different data'] = {}
+        #       @errors['Different data'][group] = {}
+        #       @errors['Different data'][group][title] = {}
+        #       data.each_pair do |key, value|
+        #         other_value = @right[group][title][key]
+        #         if value != @right[group][title][key]
+        #           @errors['Different data'][group][title][key] = [value, other_value]
+        #         end
+        #       end
+        #     end
+        #   end
+        # end
       end
     end
 
     def missing_entries
-      @left.keys.each do |group|
-        missing = []
-
-        begin
-          left_diff = @left[group].keys - @right[group].keys
-        rescue NoMethodError => e
-          left_diff = []
+      missing = @right - @left
+      if missing
+        @errors['Missing entries'] = {}
+        Keepasser.extract_groups(missing).map do |g|
+          @errors['Missing entries'][g] = []
         end
-        left_diff.map { |entry| @left[group].delete entry }
-
-        begin
-          right_diff = @right[group].keys - @left[group].keys
-        rescue NoMethodError
-          right_diff = []
-        end
-        missing += right_diff.map { |e| { e => @right[group][e] } }
-        right_diff.map { |entry| @right[group].delete entry }
-
-        if missing.any?
-          begin
-            @errors['Missing entries'][group] = missing.clone
-          rescue NoMethodError
-            @errors['Missing entries'] = {}
-            @errors['Missing entries'][group] = missing.clone
-          end
+        missing.map do |m|
+          @errors['Missing entries'][m['group']].push m
         end
       end
     end
 
     def rogue_groups
-      rogue_groups = @right.keys - @left.keys
+      rogue_groups = Keepasser.extract_groups(@right) - Keepasser.extract_groups(@left)
       if rogue_groups.length > 0
         @errors['Rogue groups'] = {}
-        rogue_groups.map { |r| @right[r] }.each do |g|
-          g.keys.map do |k|
-            e = g[k]
-            begin
-              @errors['Rogue groups'][g[k]['group']][k] = e
-            rescue NoMethodError
-              @errors['Rogue groups'][g[k]['group']] = {}
-              @errors['Rogue groups'][g[k]['group']][k] = e
-            end
-          end
+        rogue_groups.each do |group|
+          @errors['Rogue groups'][group] = Keepasser.entries_for_group @right, group
+          @right = @right - @errors['Rogue groups']["Bluth Company"]
         end
-        rogue_groups.map { |r| @right.delete r }
       end
     end
 

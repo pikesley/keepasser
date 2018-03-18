@@ -31,17 +31,15 @@ module Keepasser
           'Missing entries' => {
             'Bluth Company' => [
               {
-                'Middleman' => {
-                  'title' => 'Middleman',
-                  'username' => 'larry.middleman',
-                  'password' => 'bazbarfoo',
-                  'comment' => [
-                    'this is a comment',
-                    'also this is a comment',
-                    'and this'
-                  ],
-                  'group' => 'Bluth Company'
-                }
+                'title' => 'Middleman',
+                'username' => 'larry.middleman',
+                'password' => 'bazbarfoo',
+                'comment' => [
+                  'this is a comment',
+                  'also this is a comment',
+                  'and this'
+                ],
+                'group' => 'Bluth Company'
               }
             ]
           }

@@ -8,15 +8,15 @@ module Keepasser
       it 'finds the rogue group' do
         expect(comparator.errors).to eq ({
           'Rogue groups' => {
-            'Bluth Company' => {
-              'Attorney' => {
+            'Bluth Company' => [
+              {
                 'title' => 'Attorney',
                 'username' => 'bob.loblaw',
                 'url' => 'http://bobloblawlowblog.com',
                 'password' => 'bobloblawlowblog',
                 'group' => 'Bluth Company'
               },
-              'Middleman' => {
+              {
                 'title' => 'Middleman',
                 'username' => 'larry.middleman',
                 'password' => 'bazbarfoo',
@@ -27,7 +27,7 @@ module Keepasser
                 ],
                 'group' => 'Bluth Company'
               }
-            }
+            ]
           }
         })
       end
