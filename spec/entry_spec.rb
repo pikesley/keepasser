@@ -48,10 +48,19 @@ module Keepasser
 'Username: michael.bluth'
       ]
       entry = Entry.new source
+      entry['group'] = 'Blue Man Group'
 
       it 'takes a group' do
-        entry['group'] = 'Blue Man Group'
         expect(entry['group']).to eq 'Blue Man Group'
+      end
+
+      specify 'the group is ephemeral' do
+        expect(entry).to eq (
+          {
+            'title' => 'Secret Stuff',
+            'username' => 'michael.bluth'
+          }
+        )
       end
     end
 
@@ -64,7 +73,64 @@ module Keepasser
       entry['group'] = 'Bluth Company'
 
       it 'has an ID' do
-        expect(entry['id']).to eq 'Bluth Company::Michael Bluth' 
+        expect(entry['id']).to eq 'Bluth Company::Michael Bluth'
+      end
+
+      specify 'the ID is ephemeral' do
+        expect(entry).to eq (
+          {
+            'title' => 'Michael Bluth',
+            'username' => 'michael.bluth'
+          }
+        )
+      end
+    end
+
+    context 'presentation' do
+      source = [
+'Title:    Michael Bluth',
+'Username: michael.bluth'
+      ]
+      entry = Entry.new source
+      entry['group'] = 'Bluth Company'
+
+      it 'prints nicely' do
+        expect(entry.display).to eq (
+"""  title: Michael Bluth
+  username: michael.bluth
+""")
+      end
+
+      it 'takes different indentation' do
+        expect(entry.display 3).to eq (
+"""      title: Michael Bluth
+      username: michael.bluth
+""")
+      end
+    end
+
+    context 'presentation with comments' do
+      source = [
+'Title:    George Bluth',
+'Username: george.bluth',
+'Password: notouching',
+'Comment:   comments',
+'           more comments',
+'           yet more comments'
+      ]
+      entry = Entry.new source
+
+      it 'prints nicely with comments' do
+        expect(entry.display).to eq (
+"""  title: George Bluth
+  username: george.bluth
+  password: notouching
+  comment:
+    comments
+    more comments
+    yet more comments
+"""
+        )
       end
     end
   end

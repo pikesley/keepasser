@@ -25,3 +25,11 @@
   Url:
   Password: barfoo
   Comment:
+
+*** Group: Blue Man Group ***
+
+  Title:    Idiot
+  Username: tobias.funke
+  Url:      https://www.blueman.com/
+  Password: bluemyself
+  Comment:

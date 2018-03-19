@@ -17,9 +17,7 @@ module Keepasser
           'title' => 'Attorney',
           'username' => 'bob.loblaw',
           'url' => 'http://bobloblawlowblog.com',
-          'password' => 'bobloblawlowblog',
-          'group' => 'Bluth Company',
-          'id' => 'Bluth Company::Attorney'
+          'password' => 'bobloblawlowblog'
         },
         {
           'title' => 'Middleman',
@@ -29,9 +27,7 @@ module Keepasser
             'this is a comment',
             'also this is a comment',
             'and this'
-          ],
-          'group' => 'Bluth Company',
-          'id' => 'Bluth Company::Middleman'
+          ]
         }
       ]
     end

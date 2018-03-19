@@ -17,9 +17,7 @@ module Keepasser
                   'this is a comment',
                   'also this is a comment',
                   'and this'
-                ],
-                'group' => 'Bluth Company',
-                'id' => 'Bluth Company::Middleman'
+                ]
               }
             ]
           }
@@ -32,18 +30,29 @@ module Keepasser
             'title' => 'Attorney',
             'username' => 'bob.loblaw',
             'url' => 'http://bobloblawlowblog.com',
-            'password' => 'otherpassword',
-            'group' => 'Bluth Company',
-            'id' => 'Bluth Company::Attorney'
+            'password' => 'otherpassword'
           },
           {
             'title' => 'Daughter',
             'username' => 'sally.sitwell',
-            'password' => 'foobar',
-            'group' => 'Sitwell Enterprises',
-            'id' => 'Sitwell Enterprises::Daughter'
+            'password' => 'foobar'
           }
         ]
+      end
+
+      it 'presents itself nicely' do
+        expect(mes.to_s).to eq (
+"""  Bluth Company:
+    title: Middleman
+    username: larry.middleman
+    password: bazbarfoo
+    comment:
+      this is a comment
+      also this is a comment
+      and this
+
+"""
+        )
       end
     end
   end

@@ -5,47 +5,28 @@ module Keepasser
       right = 'spec/fixtures/multiple-diffs/right.txt'
       comparator = Comparator.new left, right
 
-      it 'identifies the differences' do
-        expect(comparator.errors).to eq ({
-          'Missing entries' => {
-            'Bluth Company' => [
-              {
-                'title' => 'Adoptee',
-                'username' => 'annyong',
-                'password' => 'annyong',
-                'group' => 'Bluth Company',
-                'id' => 'Bluth Company::Adoptee'
-              }
-            ]
-          },
-          'Different data' => {
-            'Sitwell Enterprises' => {
-              'Employee' => {
-                'password' => [
-                  'foobar',
-                  'barfoo'
-                ]
-              }
-            }
-          }
-        })
-      end
+      it 'presents the data' do
+        expect(comparator.to_s).to eq (
+"""Rogue groups:
+  Blue Man Group:
+    title: Idiot
+    username: tobias.funke
+    url: https://www.blueman.com/
+    password: bluemyself
 
-      it 'presents itself nicely' do
-        expect(comparator.to_s).to eq """---
 Missing entries:
   Bluth Company:
-  - title: Adoptee
+    title: Adoptee
     username: annyong
     password: annyong
-    group: Bluth Company
+
 Different data:
   Sitwell Enterprises:
     Employee:
       password:
       - foobar
       - barfoo
-"""
+""")
       end
     end
   end

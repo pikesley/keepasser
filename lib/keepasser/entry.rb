@@ -1,7 +1,6 @@
 module Keepasser
   class Entry < Hash
-    attr_accessor :group
-    attr_reader :fields
+    attr_reader :group
 
     def initialize data
       data.map do |d|
@@ -17,11 +16,37 @@ module Keepasser
 
     def []= key, value
       if key == 'group'
-        super
-        self['id'] = "#{self['group']}::#{self['title']}"
+        @group = value
+        @id = "#{self['group']}::#{self['title']}"
       else
         super
       end
+    end
+
+    def [] key
+      case key
+      when 'group'
+        @group
+      when 'id'
+        @id
+      else
+        super
+      end
+    end
+
+    def display indent = 1
+      s = ''
+      self.each_pair do |k, v|
+        if k == 'comment'
+          s += "%s%s:\n" % ['  ' * indent, k]
+          v.map do |comment|
+            s += "%s%s%s\n" % ['  ' * indent, '  ', comment]
+          end
+        else
+          s += "%s%s: %s\n" % ['  ' * indent, k, v]
+        end
+      end
+      s
     end
   end
 end

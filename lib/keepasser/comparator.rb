@@ -10,26 +10,33 @@ module Keepasser
 
       g = GroupEjector.new @left, @right
       if g.rogues
-        @errors['Rogue groups'] = g.rogues
+        @errors['Rogue groups'] = g
         @left = g.left
         @right = g.right
       end
 
       m = MissingEntriesSpotter.new @left, @right
       if m.extras
-        @errors['Missing entries'] = m.extras
+        @errors['Missing entries'] = m
         @left = m.left
         @right = m.right
       end
 
       d = DifferenceFinder.new @left, @right
       if d.diffs
-        @errors['Different data'] = d.diffs
+        @errors['Different data'] = d
       end
     end
 
     def to_s
-      @errors.to_yaml
+      s = ''
+
+      @errors.keys.each do |key|
+        s += "%s:\n" % key
+        s += @errors[key].to_s
+      end
+
+      s
     end
   end
 end

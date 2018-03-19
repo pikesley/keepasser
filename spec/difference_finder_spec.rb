@@ -19,6 +19,16 @@ module Keepasser
           }
         )
       end
+
+      it 'presents itself nicely' do
+        expect(df.to_s).to eq (
+"""  Bluth Company:
+    Middleman:
+      password:
+      - foobarbaz
+      - bazbarfoo
+""")
+      end
     end
   end
 end

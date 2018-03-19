@@ -22,5 +22,9 @@ module Keepasser
         end
       end
     end
+
+    def to_s
+      @diffs.to_yaml.gsub("---\n", '').gsub(/^/, '  ')
+    end
   end
 end
