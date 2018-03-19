@@ -3,7 +3,7 @@
   Title:    Attorney
   Username: bob.loblaw
   Url:      http://bobloblawlowblog.com
-  Password: otherpassword
+  Password: bobloblawlowblog
   Comment:
 
   Title:    Middleman
@@ -14,10 +14,16 @@
             also this is a comment
             and this
 
-*** Group: Sitwell Enterprises ***
+*** Group: Blue Man Group ***
 
-  Title:    Daughter
-  Username: sally.sitwell
-  Url:
-  Password: foobar
+  Title:    Idiot
+  Username: tobias.funke
+  Url:      https://www.blueman.com/
+  Password: bluemyself
+  Comment:
+
+  Title:    Blue Man
+  Username: blue.man
+  Url:      https://www.blueman.com/
+  Password: password
   Comment:
