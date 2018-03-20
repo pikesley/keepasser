@@ -1,13 +1,20 @@
 module Keepasser
   describe Entry do
+    source = [
+      'Title:    Github',
+      'Username: pikesley',
+      'Url:      https://github.com',
+      'Password: githubpassword',
+      'Comment:'
+    ]
+
+    comments = [
+      'Comment:  comments',
+      '          more comments',
+      '          yet more comments'
+    ]
+
     context 'make a simple entry' do
-      source = [
-        'Title:    Github',
-        'Username: pikesley',
-        'Url:      https://github.com',
-        'Password: githubpassword',
-        'Comment:'
-      ]
       entry = Entry.new source
 
       it 'has fields' do
@@ -21,16 +28,7 @@ module Keepasser
     end
 
     context 'entry with multi-line comment' do
-      source = [
-        'Title:    Github',
-        'Username: pikesley',
-        'Url:      https://github.com',
-        'Password: githubpassword',
-        'Comment:  comments',
-        '          more comments',
-        '          yet more comments'
-      ]
-      entry = Entry.new source
+      entry = Entry.new source + comments
 
       it 'has comments' do
         expect(entry['comment']).to eq [
@@ -42,16 +40,12 @@ module Keepasser
     end
 
     context 'multi-line comment with blank lines' do
-      source = [
-        'Title:    Github',
-        'Username: pikesley',
-        'Url:      https://github.com',
-        'Password: githubpassword',
+      comments_with_blank_line = [
         'Comment:  the next line is blank',
         '          ',
         '          intentionally'
       ]
-      entry = Entry.new source
+      entry = Entry.new source + comments_with_blank_line
 
       it 'has comments' do
         expect(entry['password']).to eq 'githubpassword'
@@ -64,13 +58,6 @@ module Keepasser
     end
 
     context 'assign a group' do
-      source = [
-        'Title:    Github',
-        'Username: pikesley',
-        'Url:      https://github.com',
-        'Password: githubpassword',
-        'Comment:'
-      ]
       entry = Entry.new source
       entry['group'] = 'web'
 
@@ -91,13 +78,6 @@ module Keepasser
     end
 
     context 'assign an ID' do
-      source = [
-        'Title:    Github',
-        'Username: pikesley',
-        'Url:      https://github.com',
-        'Password: githubpassword',
-        'Comment:'
-      ]
       entry = Entry.new source
       entry['group'] = 'web'
 
@@ -118,13 +98,6 @@ module Keepasser
     end
 
     context 'presentation' do
-      source = [
-        'Title:    Github',
-        'Username: pikesley',
-        'Url:      https://github.com',
-        'Password: githubpassword',
-        'Comment:'
-      ]
       entry = Entry.new source
       entry['group'] = 'web'
 
@@ -148,16 +121,7 @@ module Keepasser
     end
 
     context 'presentation with comments' do
-      source = [
-        'Title:    Github',
-        'Username: pikesley',
-        'Url:      https://github.com',
-        'Password: githubpassword',
-        'Comment:  comments',
-        '          more comments',
-        '          yet more comments'
-      ]
-      entry = Entry.new source
+      entry = Entry.new source + comments
 
       it 'prints nicely with comments' do
         expect(entry.display).to eq (
