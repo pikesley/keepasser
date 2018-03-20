@@ -1,19 +1,38 @@
-*** Group: Bluth Company ***
 
-  Title:    Attorney
-  Username: bob.loblaw
-  Url:      http://bobloblawlowblog.com
-  Password: bobloblawlowblog
+*** Group: web ***
+
+  Title:    CloudFlare
+  Username: sam@fake.com
+  Url:
+  Password: someoldpassword
   Comment:
 
-  Title:    Middleman
-  Username: larry.middleman
+  Title:    DigitalOcean
+  Username: sam@fake.com
   Url:
-  Password: foobarbaz
+  Password: someotherpassword
   Comment:
 
-  Title:    Weatherman
-  Username: j.walter.weatherman@bluth.com
+  Title:    Github
+  Username: pikesley
+  Url:      https://github.com/
+  Password: githubpassword
+  Comment:  Recovery codes:
+
+            abcde-fghij
+            lmnop-qrstu
+
+  Title:    Heroku
+  Username: sam@fake.com
   Url:
-  Password: andthatswhyyoualwaysleaveanote
-  Comment:  
+  Password: heroku123
+  Comment:  123123123123
+            456456456456
+
+  Title:    Rubygems
+  Username: pikesley
+  Url:
+  Password: gemsgemsgems
+  Comment:  Some comment
+
+            with blank lines
