@@ -31,9 +31,10 @@ module Keepasser
     end
 
     def push_entry
-      e = Entry.new @bucket
-      e['group'] = @group
-      self.push e
+      self.push(Entry.new do |e|
+        e.data = @bucket
+        e.group = @group
+      end)
     end
   end
 end
