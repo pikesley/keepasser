@@ -7,34 +7,47 @@ module Keepasser
       lines = File.readlines @path
 
       first = true
-      bucket = []
+      @bucket = []
       lines.each do |line|
-        if line[0..8] == '*** Group'
-          @group = line[11..-6]
+        if line.is_group?
+          @group = line.group
         else
-          if line[0..7] == '  Title:'
+          if line.is_title?
             if first
-              bucket = [line]
+              @bucket = [line]
               first = false
             else
-              if bucket.any?
-                e = Entry.new bucket
-                e['group'] = @group
-
-                self.push e.clone
-
-                bucket = [line]
+              if @bucket.any?
+                push_entry
+                @bucket = [line]
               end
             end
           else
-            bucket.push line
+            @bucket.push line
           end
         end
       end
-      e = Entry.new bucket
-      e['group'] = @group
-
-      self.push e.clone
+      push_entry
     end
+
+    def push_entry
+      e = Entry.new @bucket
+      e['group'] = @group
+      self.push e
+    end
+  end
+end
+
+class String
+  def is_group?
+    self[0..8] == '*** Group'
+  end
+
+  def is_title?
+    self[0..7] == '  Title:'
+  end
+
+  def group
+    self.strip[11..-5]
   end
 end

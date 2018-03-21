@@ -1,0 +1,52 @@
+
+*** Group: web ***
+
+  Title:    CloudFlare
+  Username: sam@fake.com
+  Url:
+  Password: someoldpassword
+  Comment:
+
+  Title:    DigitalOcean
+  Username: sam@fake.com
+  Url:
+  Password: someotherpassword
+  Comment:
+
+  Title:    Github
+  Username: pikesley
+  Url:      https://github.com/
+  Password: githubpassword
+  Comment:  Recovery codes:
+
+            abcde-fghij
+            lmnop-qrstu
+
+  Title:    Heroku
+  Username: sam@fake.com
+  Url:
+  Password: heroku123
+  Comment:  123123123123
+            456456456456
+
+  Title:    Rubygems
+  Username: pikesley
+  Url:
+  Password: gemsgemsgems
+  Comment:  Some comment
+
+            with blank lines
+
+*** Group: shops ***
+
+  Title:    Amazon
+  Username: sam@fake.com
+  Url:      http://amazon.co.uk
+  Password: spendmoneynow
+  Comment:
+
+  Title:    Nike
+  Username: sam@fake.com
+  Url:
+  Password: youdontneedmoresneakers
+  Comment:

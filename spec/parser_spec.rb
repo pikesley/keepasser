@@ -22,16 +22,37 @@ module Keepasser
       end
     end
 
-    # context 'parse a more complex file' do
-    #   parser = Parser.new 'spec/fixtures/multiple-groups.txt'
-    #
-    #   it 'has groups' do
-    #     expect(parser.map { |e| e['group'] }.uniq.length).to eq 2
-    #   end
-    #
-    #   it 'has correct groups' do
-    #     expect(parser[3]['group']).to eq 'Sitwell Enterprises'
-    #   end
-    # end
+    context 'parse a more complex file' do
+      parser = Parser.new 'spec/fixtures/two-groups.txt'
+
+      it 'has groups' do
+        expect(parser.map { |e| e['group'] }.uniq.length).to eq 2
+      end
+
+      it 'has correct entries' do
+        entry = parser[6]
+        expect(entry['title']).to eq 'Nike'
+        expect(entry['username']).to eq 'sam@fake.com'
+        expect(entry['password']).to eq 'youdontneedmoresneakers'
+        expect(entry['group']).to eq 'shops'
+        expect(entry['id']).to eq 'shops::Nike'
+      end
+    end
+
+    context 'monkey-patched String' do
+      it 'detects a group' do
+        expect('*** Group: web ***'.is_group?).to be true
+        expect('  Title: Slashdot'.is_group?).to be false
+      end
+
+      it 'detects a title' do
+        expect('  Title: Slashdot'.is_title?).to be true
+        expect('  Url: https://slashdot.org'.is_title?).to be false
+      end
+
+      it 'extracts a group name' do
+        expect("*** Group: web ***\n".group).to eq 'web'
+      end
+    end
   end
 end
