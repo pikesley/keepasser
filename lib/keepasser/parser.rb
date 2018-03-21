@@ -6,22 +6,28 @@ module Keepasser
       @path = path
       lines = File.readlines @path
 
-      bucket= []
+      first = true
+      bucket = []
       lines.each do |line|
         if line[0..8] == '*** Group'
           @group = line[11..-6]
         else
-          unless line == "\n"
-            bucket.push line
-          else
-            if bucket.any?
-              e = Entry.new bucket
-              e['group'] = @group
+          if line[0..7] == '  Title:'
+            if first
+              bucket = [line]
+              first = false
+            else
+              if bucket.any?
+                e = Entry.new bucket
+                e['group'] = @group
 
-              self.push e.clone
+                self.push e.clone
 
-              bucket = []
+                bucket = [line]
+              end
             end
+          else
+            bucket.push line
           end
         end
       end

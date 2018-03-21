@@ -14,12 +14,11 @@ module Keepasser
       it 'has correct entries' do
         entry = parser[0]
         expect(entry).to be_an Entry
+        expect(entry['title']).to eq 'CloudFlare'
         expect(entry['username']).to eq 'sam@fake.com'
         expect(entry['password']).to eq 'someoldpassword'
-      end
-
-      specify 'entries have a group' do
-        expect(parser[0]['group']).to eq 'web'
+        expect(entry['group']).to eq 'web'
+        expect(entry['id']).to eq 'web::CloudFlare'
       end
     end
 
